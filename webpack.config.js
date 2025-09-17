@@ -32,17 +32,28 @@ module.exports = async (env, options) => {
         {
           test: /\.ts$/,
           exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env", "@babel/preset-typescript"],
-              plugins: [
-                "babel-plugin-transform-typescript-metadata",
-                ["@babel/plugin-proposal-decorators", { version: "legacy" }],
-                ["@babel/plugin-proposal-class-properties", { loose: true }],
-              ],
+          use: [
+            {
+              loader: "babel-loader",
+              options: {
+                presets: ["@babel/preset-env"],
+                plugins: [
+                  "babel-plugin-transform-typescript-metadata",
+                  ["@babel/plugin-proposal-decorators", { version: "legacy" }],
+                  ["@babel/plugin-proposal-class-properties", { loose: true }],
+                ],
+              },
             },
-          },
+            {
+              loader: "ts-loader",
+              options: {
+                transpileOnly: false,
+                compilerOptions: {
+                  module: "esnext",
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.html$/,
