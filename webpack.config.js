@@ -33,7 +33,15 @@ module.exports = async (env, options) => {
           test: /\.ts$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env", "@babel/preset-typescript"],
+              plugins: [
+                "babel-plugin-transform-typescript-metadata",
+                ["@babel/plugin-proposal-decorators", { version: "legacy" }],
+                ["@babel/plugin-proposal-class-properties", { loose: true }],
+              ],
+            },
           },
         },
         {
@@ -87,7 +95,10 @@ module.exports = async (env, options) => {
       },
       server: {
         type: "https",
-        options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
+        options:
+          env.WEBPACK_BUILD || options.https !== undefined
+            ? options.https
+            : await getHttpsOptions(),
       },
       port: process.env.npm_package_config_dev_server_port || 3000,
     },
