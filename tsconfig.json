@@ -2,25 +2,21 @@
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": ".",
+    "declaration": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "jsx": "react",
     "noEmitOnError": true,
     "outDir": "lib",
     "sourceMap": true,
     "target": "es5",
-    "lib": [
-      "es2015",
-      "dom"
-    ]
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["es2015", "dom"]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "lib",
-    "lib-amd"
-  ],
-  "ts-node": { 
-    "files": true 
+  "exclude": ["node_modules", "dist", "lib", "lib-amd"],
+  "ts-node": {
+    "files": true
   }
 }
